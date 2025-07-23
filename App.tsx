@@ -1,7 +1,12 @@
 import CategoriesScreen from "./screens/CategoriesScreen";
+import {StatusBar} from "react-native";
 
 export default function App() {
   return (
-    <CategoriesScreen />
+    <>
+      <StatusBar barStyle="light-content" />
+      <CategoriesScreen />
+    </>
+
   );
 }
