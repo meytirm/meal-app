@@ -1,9 +1,11 @@
 import {StyleSheet, Text, View} from "react-native";
+import {RouteProp} from "@react-navigation/native";
 
-function MealsOverviewScreen() {
+function MealsOverviewScreen({route}:Props) {
+  const catId = route.params.categoryId
   return (
     <View style={styles.container}>
-      <Text>Meals Overview Screen</Text>
+      <Text>Meals Overview Screen - {catId}</Text>
     </View>
   )
 }
@@ -16,3 +18,7 @@ const styles = StyleSheet.create({
     padding: 16
   }
 })
+
+interface Props {
+  route: RouteProp<{ Home: {categoryId: string} }>
+}
