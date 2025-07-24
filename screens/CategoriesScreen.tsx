@@ -8,7 +8,9 @@ import {ParamListBase} from "@react-navigation/native";
 function CategoriesScreen({navigation}:Props) {
   function renderCategoryItem(itemData: Category) {
     function pressHandler() {
-      navigation.navigate("MealsOverview")
+      navigation.navigate("MealsOverview", {
+        categoryId: itemData.id
+      })
     }
 
     return <CategoryGridTile
