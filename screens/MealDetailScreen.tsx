@@ -1,9 +1,9 @@
 import {Text, View} from "react-native";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
-type MealsOverviewProps = NativeStackScreenProps<{ MealDetail: { mealDetail: string } }, 'MealDetail'>;
+type MealsOverviewProps = NativeStackScreenProps<{ MealDetail: { mealId: string } }, 'MealDetail'>;
 
 function MealDetailScreen({route}: MealsOverviewProps) {
-  const mealId = route.params.mealDetail
+  const mealId = route.params.mealId
 
   return (
     <View>
