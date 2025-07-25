@@ -1,5 +1,4 @@
 import {FlatList, StyleSheet, View} from "react-native";
-import {RouteProp} from "@react-navigation/native";
 import {MEALS} from "../data/dummy-data";
 import MealItem from "../components/MealItem";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
