@@ -2,8 +2,9 @@ import {FlatList, StyleSheet, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {MEALS} from "../data/dummy-data";
 import MealItem from "../components/MealItem";
+import {NativeStackScreenProps} from "@react-navigation/native-stack";
 
-function MealsOverviewScreen({route}:Props) {
+function MealsOverviewScreen({route}:MealsOverviewProps) {
   const catId = route.params.categoryId
   const displayedMeals = MEALS.filter((mealItem) => {
     return mealItem.categoryIds.indexOf(catId) !== -1;
@@ -36,6 +37,4 @@ const styles = StyleSheet.create({
   }
 })
 
-interface Props {
-  route: RouteProp<{ Home: {categoryId: string} }>
-}
+type MealsOverviewProps = NativeStackScreenProps<{ MealsOverview: {categoryId: string} }, 'MealsOverview'>;
