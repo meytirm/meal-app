@@ -26,6 +26,7 @@ function MealsOverviewScreen({route, navigation}: MealsOverviewProps) {
         keyExtractor={(item) => item.id}
         renderItem={(itemData) =>
           <MealItem
+            id={itemData.item.id}
             title={itemData.item.title}
             imageUrl={itemData.item.imageUrl}
             duration={itemData.item.duration}
