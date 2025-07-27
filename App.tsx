@@ -1,12 +1,11 @@
 import CategoriesScreen from "./screens/CategoriesScreen";
-import {Pressable, StatusBar, Text} from "react-native";
+import {StatusBar} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import {RootStackParamList} from "./types";
 import MealDetailScreen from "./screens/MealDetailScreen";
-import {createDrawerNavigator, DrawerNavigationProp} from "@react-navigation/drawer";
-import {Ionicons} from "@expo/vector-icons";
+import {createDrawerNavigator} from "@react-navigation/drawer";
 import FavoritesScreen from "./screens/FavoritesScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
