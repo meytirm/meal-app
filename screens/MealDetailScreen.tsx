@@ -1,17 +1,30 @@
-import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Button, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {MEALS} from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import TextSubtitle from "../components/MealDetail/TextSubtitle";
 import ListItem from "../components/MealDetail/ListItem";
+import {useLayoutEffect} from "react";
 
 type MealsOverviewProps = NativeStackScreenProps<{ MealDetail: { mealId: string } }, 'MealDetail'>;
 
-function MealDetailScreen({route}: MealsOverviewProps) {
+function MealDetailScreen({route, navigation}: MealsOverviewProps) {
   const mealId = route.params.mealId
 
   const selectedMeal = MEALS
     .find((meal) => meal.id === mealId)
+
+  function handleButtonPress() {
+    console.log('Button Pressed!')
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return <Button title="Tap me" onPress={handleButtonPress} />
+      }
+    })
+  }, [navigation])
 
   if (!selectedMeal) {
     return <View>
