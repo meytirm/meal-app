@@ -1,5 +1,5 @@
 import CategoriesScreen from "./screens/CategoriesScreen";
-import {Pressable, StatusBar} from "react-native";
+import {Pressable, StatusBar, Text} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
@@ -7,72 +7,68 @@ import {RootStackParamList} from "./types";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import {createDrawerNavigator, DrawerNavigationProp} from "@react-navigation/drawer";
 import {Ionicons} from "@expo/vector-icons";
+import FavoritesScreen from "./screens/FavoritesScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 const Drawer = createDrawerNavigator()
+
+function DrawerNavigator() {
+  return <Drawer.Navigator screenOptions={{
+    drawerActiveBackgroundColor: '#ffd0af',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: '#330000',
+    },
+    sceneStyle: {
+      backgroundColor: '#452619',
+    },
+    drawerContentStyle: {
+      backgroundColor: '#452619',
+    },
+    drawerActiveTintColor: 'black',
+    drawerInactiveTintColor: 'white',
+  }}>
+    <Drawer.Screen name="Categories" component={CategoriesScreen} />
+    <Drawer.Screen name="Favorites" component={FavoritesScreen} />
+  </Drawer.Navigator>
+}
 
 export default function App() {
   return (
     <>
       <StatusBar barStyle="light-content"/>
       <NavigationContainer>
-        <Drawer.Navigator screenOptions={{
-          headerShown: false,
-          drawerActiveBackgroundColor: '#ffd0af',
-          drawerContentStyle: {
+        return <Stack.Navigator screenOptions={
+        {
+          headerStyle: {
+            backgroundColor: '#330000'
+          },
+          headerTintColor: 'white',
+          contentStyle: {
             backgroundColor: '#452619'
-          }
-        }}>
-          <Drawer.Screen
-            name="MealsCategories"
-            component={StackNavigator}
-          />
-        </Drawer.Navigator>
+          },
+        }
+      }>
+        <Stack.Screen
+          name="MealsCategories"
+          component={DrawerNavigator}
+          options={{
+            title: 'All Categories',
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="MealsOverview"
+          component={MealsOverviewScreen}
+        />
+        <Stack.Screen
+          name="MealDetail"
+          component={MealDetailScreen}
 
+        />
+      </Stack.Navigator>
       </NavigationContainer>
     </>
 
   );
 }
-
-function StackNavigator({navigation}: Props) {
-  return <Stack.Navigator screenOptions={
-    {
-      headerStyle: {
-        backgroundColor: '#330000'
-      },
-      headerTintColor: 'white',
-      contentStyle: {
-        backgroundColor: '#452619'
-      }
-    }
-  }>
-    <Stack.Screen
-      name="MealsCategories"
-      component={CategoriesScreen}
-      options={{
-        title: 'All Category',
-        headerLeft: () => {
-          return <Pressable
-            onPress={() => navigation.openDrawer()}
-          >
-            <Ionicons name="menu" size={24} color="white"/>
-          </Pressable>
-        }
-      }}
-    />
-    <Stack.Screen
-      name="MealsOverview"
-      component={MealsOverviewScreen}
-    />
-    <Stack.Screen
-      name="MealDetail"
-      component={MealDetailScreen}
-
-    />
-  </Stack.Navigator>
-}
-
-type Props = {
-  navigation: DrawerNavigationProp<RootStackParamList, 'MealsCategories'>;
-};
