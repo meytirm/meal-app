@@ -5,11 +5,10 @@ function MealDetails(
     duration,
     complexity,
     affordability,
-    style,
     textStyle
   }: Props) {
   return (
-    <View style={[styles.details, style]}>
+    <View style={[styles.details]}>
       <Text style={[styles.detailItem, textStyle]}>{duration}m</Text>
       <Text style={[styles.detailItem, textStyle]}>{complexity.toUpperCase()}</Text>
       <Text style={[styles.detailItem, textStyle]}>{affordability.toUpperCase()}</Text>
@@ -36,6 +35,5 @@ interface Props {
   duration: number
   complexity: string
   affordability: string
-  style: object
-  textStyle: object
+  textStyle?: object
 }
