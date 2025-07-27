@@ -50,9 +50,7 @@ A **React Native** app built with **TypeScript** that displays meal categories, 
 ├── components/            # Reusable UI components
 │   └── (e.g., MealItem.tsx, CategoryGridTile.tsx)
 ├── assets/                # Images, fonts, etc.
-├── navigation/            # Navigation configuration (optional)
 │   └── (e.g., AppNavigator.tsx)
-├── constants/             # App-wide constants (optional)
 ├── package.json
 ├── README.md
 └── ... (other config files)
