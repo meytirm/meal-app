@@ -1,8 +1,8 @@
 import {Image, Platform, Pressable, StyleSheet, Text, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "../types";
-import MealDetails from "./MealDetails";
+import {RootStackParamList} from "../../types";
+import MealDetails from "../MealDetails";
 type NavigationProp = StackNavigationProp<RootStackParamList, 'MealDetail'>
 function MealItem({id, title, imageUrl, duration, complexity, affordability}: Props) {
   const navigation = useNavigation<NavigationProp>();
