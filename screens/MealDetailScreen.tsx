@@ -4,32 +4,41 @@ import {MEALS} from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import TextSubtitle from "../components/MealDetail/TextSubtitle";
 import ListItem from "../components/MealDetail/ListItem";
-import {useLayoutEffect} from "react";
+import {useContext, useLayoutEffect} from "react";
 import IconButton from "../components/IconButton";
+import {FavoritesContext} from "../store/context/favorites-context";
 
 type MealsOverviewProps = NativeStackScreenProps<{ MealDetail: { mealId: string } }, 'MealDetail'>;
 
 function MealDetailScreen({route, navigation}: MealsOverviewProps) {
+  const {ids, removeFavorite, addFavorite} = useContext(FavoritesContext)
   const mealId = route.params.mealId
+
+  const isFavorite = ids.includes(mealId)
+  const isFavoriteIcon = isFavorite ? 'star' : 'star-outline'
 
   const selectedMeal = MEALS
     .find((meal) => meal.id === mealId)
 
-  function handleButtonPress() {
-    console.log('Button Pressed!')
+  function handleFavoriteButtonPress() {
+    if (isFavorite) {
+      removeFavorite(mealId)
+    } else {
+      addFavorite(mealId)
+    }
   }
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
         return <IconButton
-          onPress={handleButtonPress}
-          icon="star"
+          onPress={handleFavoriteButtonPress}
+          icon={isFavoriteIcon}
           color="white"
         />
       }
     })
-  }, [navigation])
+  }, [navigation, handleFavoriteButtonPress])
 
   if (!selectedMeal) {
     return <View>
