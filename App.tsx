@@ -56,7 +56,7 @@ export default function App() {
       <StatusBar barStyle="light-content"/>
       <FavoritesContextProvider>
         <NavigationContainer>
-          return <Stack.Navigator screenOptions={
+          <Stack.Navigator screenOptions={
           {
             headerStyle: {
               backgroundColor: '#330000'
