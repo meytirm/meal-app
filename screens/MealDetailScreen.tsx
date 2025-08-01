@@ -4,17 +4,23 @@ import {MEALS} from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import TextSubtitle from "../components/MealDetail/TextSubtitle";
 import ListItem from "../components/MealDetail/ListItem";
-import {useContext, useLayoutEffect} from "react";
+import {useLayoutEffect} from "react";
 import IconButton from "../components/IconButton";
-import {FavoritesContext} from "../store/context/favorites-context";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {RootState} from "../store/redux/store";
+// import {FavoritesContext} from "../store/context/favorites-context";
+import {addFavorite, removeFavorite} from "../store/redux/favorites";
 
 type MealsOverviewProps = NativeStackScreenProps<{ MealDetail: { mealId: string } }, 'MealDetail'>;
 
 function MealDetailScreen({route, navigation}: MealsOverviewProps) {
-  const {ids, removeFavorite, addFavorite} = useContext(FavoritesContext)
+  // const {ids, removeFavorite, addFavorite} = useContext(FavoritesContext)
+  const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const favoriteMealIds = useTypedSelector((state => state.favoriteMeals.ids))
+  const dispatch = useDispatch()
   const mealId = route.params.mealId
 
-  const isFavorite = ids.includes(mealId)
+  const isFavorite = favoriteMealIds.includes(mealId)
   const isFavoriteIcon = isFavorite ? 'star' : 'star-outline'
 
   const selectedMeal = MEALS
@@ -22,9 +28,11 @@ function MealDetailScreen({route, navigation}: MealsOverviewProps) {
 
   function handleFavoriteButtonPress() {
     if (isFavorite) {
-      removeFavorite(mealId)
+      // removeFavorite(mealId)
+      dispatch(removeFavorite({id: mealId}))
     } else {
-      addFavorite(mealId)
+      // addFavorite(mealId)
+      dispatch(addFavorite({id: mealId}))
     }
   }
 
